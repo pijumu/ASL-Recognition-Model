@@ -25,6 +25,7 @@ double Matrix::element(int i, int j) const {
     return Matrix::elements[i][j];
 }
 
+
 double* Matrix::sum_vector(double* vector_1, const double* vector_2, int size) {
     for (int i{0}; i < size; ++i) {
         vector_1[i] += vector_2[i];
@@ -34,6 +35,7 @@ double* Matrix::sum_vector(double* vector_1, const double* vector_2, int size) {
 
 Matrix operator*(const Matrix& matrix1, const Matrix& matrix2) {
     auto** elems = new double* [matrix1.get_row()];
+
     for (int i{0}; i < matrix1.get_row(); ++i) {
         elems[i] = new double [matrix2.get_column()];
     }
