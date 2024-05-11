@@ -25,7 +25,8 @@ double Matrix::element(int i, int j) const {
     return Matrix::elements[i][j];
 }
 
-double* sum_vector(double* vector_1, const double* vector_2, int size) {
+
+double* Matrix::sum_vector(double* vector_1, const double* vector_2, int size) {
     for (int i{0}; i < size; ++i) {
         vector_1[i] += vector_2[i];
     }
@@ -33,7 +34,8 @@ double* sum_vector(double* vector_1, const double* vector_2, int size) {
 }
 
 Matrix operator*(const Matrix& matrix1, const Matrix& matrix2) {
-    double** elems = new double* [matrix1.get_row()];
+    auto** elems = new double* [matrix1.get_row()];
+
     for (int i{0}; i < matrix1.get_row(); ++i) {
         elems[i] = new double [matrix2.get_column()];
     }
@@ -45,12 +47,11 @@ Matrix operator*(const Matrix& matrix1, const Matrix& matrix2) {
             }
         }
     }
-    Matrix result{matrix1.get_row(), matrix2.get_column(), elems};
-    return result;
+    return Matrix {matrix1.get_row(), matrix2.get_column(), elems};
 }
 
 double* operator*(const Matrix& matrix, const double* vector) {
-    double* result = new double[matrix.get_row()];
+    auto* result = new double[matrix.get_row()];
     for (int i{0}; i < matrix.get_row(); ++i) {
         double value{0};
         for (int j{0}; j < matrix.get_column(); ++j) {
@@ -62,7 +63,7 @@ double* operator*(const Matrix& matrix, const double* vector) {
 }
 
 double* operator*(const double* vector, const Matrix& matrix) {
-    double* result = new double[matrix.get_column()];
+    auto* result = new double[matrix.get_column()];
     for (int j{0}; j < matrix.get_column(); ++j) {
         double value{0};
         for (int i{0}; i < matrix.get_row(); ++i) {
