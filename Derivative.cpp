@@ -1,6 +1,6 @@
 #include "Derivative.h"
 
-double* Derivative::relu(const double* neurons, const double* sums, int size){
+double* Derivative::relu(const double* sums, int size){
     auto* relu_neurons = new double[size];
     for (int i{0}; i < size; ++i) {
         if (0 < sums[i] and sums[i] > 1) {
