@@ -1,8 +1,10 @@
 #include "Matrix.h"
+#include "Derivative.h"
 #include <string>
 #include <vector>
+#include "Activation.h"
 #include "yaml-cpp/yaml.h"
-
+#include <fstream>
 class Layer {
     // activation_function - название функции активации
     // size - кол-во нейронов в слою
