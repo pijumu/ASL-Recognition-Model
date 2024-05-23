@@ -1,26 +1,18 @@
 #include "Network.h"
 
-Layer::Layer(std::string& act_func, int size, Matrix& weights):
+Layer::Layer(std::string& act_func, int size, Matrix& weights, double* bias_weights):
     act_func(act_func),
     size(size),
     weights(weights),
-    bias(bias), {}
+    bias_weights(bias_weights) {};
 
 Layer::Layer(std::string& act_func, int size, int row):
     act_func(act_func),
     size(size),
     weights(row, size),
-    bias(new double[row]) {
+    bias_weights(new double[row]) {
     for (int i=0; i < row; ++i) {
-        bias[i] = ((std::rand() % 100)) * 0.007 / row;
-    }
-}
-
-Network::Network(const std::string& path, const std::string& train_or_predict) {
-    if (train_or_predict == "predict") {
-        *this.read_weights(const std::string& path);
-    } else if (train_or_predict == "train") {
-        *this.read_config(const std::string& path);
+        bias_weights[i] = ((std::rand() % 100)) * 0.007 / row;
     }
 }
 
@@ -54,4 +46,3 @@ Network::forward_feed(double* initial_neurons) {
         }
     }
 }
-

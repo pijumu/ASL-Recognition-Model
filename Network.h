@@ -1,7 +1,7 @@
 #include "Matrix.h"
 #include <string>
 #include <vector>
-
+#include "yaml-cpp/yaml.h"
 
 class Layer {
     // activation_function - название функции активации
@@ -9,6 +9,7 @@ class Layer {
     // weights - веса
     // bias - он самый
     // neurons - значение нейронов
+  public:
     std::string act_func;
     int size;
     Matrix weights;
@@ -17,20 +18,17 @@ class Layer {
     double* neurons_err;
     double* sums; // for relu
 
-  public:
     Layer(std::string& act_func, int size, Matrix& weights, double* bias);
-    Laeyr(std::string& act_func, int size, int row);
+    Layer(std::string& act_func, int size, int row);
 
 };
 
 class Network {
-
+  public:
     int size;
-    double** neurons_err;
-    std::vector<Layer> layers;
     std::string loss_func;
-
-  public:    
+    std::vector<Layer> layers;
+      
     Network(const std::string& path, const std::string& train_or_predict);
     
     void set_input();
@@ -39,7 +37,5 @@ class Network {
 
     int predict();
 
-    void read_config(const std::string& path);
-    void read_weights(const std::string& path);
     void write_weights(const std::string& path);
 };
