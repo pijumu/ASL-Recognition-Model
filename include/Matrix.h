@@ -12,7 +12,7 @@ class Matrix {
   public:
     Matrix(int row, int column);
     Matrix(int row, int column, double** elements);
-
+    static double* multy_elements(double* vector_1, const double* vector_2, int size);
     static double* sum_vector(double* vector_1, const double* vector_2, int size);
     friend double* operator* (const Matrix& matrix, const double* vector);
     friend double* operator* (const double* vector, const Matrix& matrix);

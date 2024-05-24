@@ -5,8 +5,8 @@
 
 class Activation {
   public:
-    static void softmax(double *sums, int size);
-    static void relu(double *sums, int size);
-    static void sigmoid(double *sums, int size);
+    static double* softmax(double *sums, int size);
+    static double* relu(double *sums, int size);
+    static double* sigmoid(double *sums, int size);
 };
 #endif

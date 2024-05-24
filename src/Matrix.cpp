@@ -71,3 +71,9 @@ double* operator*(const double* vector, const Matrix& matrix) {
     }
     return result;
 }
+double* Matrix::multy_elements(double* vector_1, const double* vector_2, int size) {
+    for (int i{0}; i < size; ++i) {
+        vector_1[i] = vector_1[i] * vector_2[i];
+    }
+    return vector_1;
+}
