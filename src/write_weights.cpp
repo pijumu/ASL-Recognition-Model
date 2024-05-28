@@ -8,9 +8,6 @@ void Network::write_weights(const std::string& path) {
     emitter << YAML::Key << "network size";
     emitter << YAML::Value << size;
 
-    emitter << YAML::Key << "loss function";
-    emitter << YAML::Value << loss_func;
-
     emitter << YAML::Key << "layers";
     emitter<< YAML::BeginSeq;
     for (int index{0}; index < size; ++index) {
@@ -19,7 +16,7 @@ void Network::write_weights(const std::string& path) {
         emitter << YAML::Value << layers[index].act_func;
         emitter << YAML::Key << "weights";
         emitter<<YAML::Value << YAML::BeginSeq;
-        for (int i{0}; i < layers[index].size; ++i) {
+        for (int i{0}; i < layers[index].weights.get_row(); ++i) {
             emitter <<YAML::Value << YAML::Flow;
             emitter <<YAML::Value << YAML::BeginSeq;
             for (int j{0}; j < layers[index].weights.get_column(); ++j) {
