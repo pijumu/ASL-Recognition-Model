@@ -25,6 +25,10 @@ double Matrix::element(int i, int j) const {
     return Matrix::elements[i][j];
 }
 
+double& Matrix::elem(int i, int j) {
+    return Matrix::elements[i][j];
+}
+
 double* Matrix::sum_vector(double* vector_1, const double* vector_2, int size) {
     for (int i{0}; i < size; ++i) {
         vector_1[i] += vector_2[i];

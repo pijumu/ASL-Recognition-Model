@@ -21,5 +21,6 @@ class Matrix {
     [[nodiscard]] int get_row() const;
     [[nodiscard]] int get_column() const;
     [[nodiscard]] double element(int i, int j) const;
+    double& elem(int i, int j);
 };
 #endif

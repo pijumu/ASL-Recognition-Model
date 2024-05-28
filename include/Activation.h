@@ -3,10 +3,9 @@
 #include <iostream>
 #include <cmath>
 
-class Activation {
-  public:
-    static double* softmax(double *sums, int size);
-    static double* relu(double *sums, int size);
-    static double* sigmoid(double *sums, int size);
-};
+namespace act {
+    double* softmax(double *sums, int size);
+    double* relu(double *sums, int size);
+    double* sigmoid(double *sums, int size);
+}
 #endif

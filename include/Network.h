@@ -5,6 +5,7 @@
 #include "Activation.h"
 #include "yaml-cpp/yaml.h"
 #include <fstream>
+
 class Layer {
     // activation_function - название функции активации
     // size - кол-во нейронов в слою
@@ -17,7 +18,7 @@ class Layer {
     Matrix weights;
     double* bias_weights;
     double* neurons;
-    double* neurons_err;
+    double* de_ds;
     double* sums; // for relu
 
     Layer(std::string& act_func, int size, Matrix& weights, double* bias);
@@ -30,12 +31,14 @@ class Network {
     int size;
     std::string loss_func;
     std::vector<Layer> layers;
+    double* initial_neurons;
       
     Network(const std::string& path, const std::string& train_or_predict);
     
-    void set_input();
-    void forward_feed(double* initial_neurons);
-    void back_propagation(double* initial_neurons);
+    void set_input(double* initial_neurons);
+    void forward_feed();
+    void back_propagation(double* expected);
+    void update_weights(double lr);
 
     int predict();
 

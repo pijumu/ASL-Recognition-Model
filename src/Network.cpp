@@ -15,39 +15,8 @@ Layer::Layer(std::string& act_func, int size, int row):
         bias_weights[i] = ((std::rand() % 100)) * 0.007 / row;
     }
 }
-/*
-Network::forward_feed(double* initial_neurons) {
-    for (int i=0; i < size; ++i) {
-        if (i == 0) {
-            if (layers[i].act_func == "relu") {
-                layers[i].sums = sum_vector(
-                        initial_neurons * layers[i].weights,
-                        layers[i].bias_weights,
-                        layers[i].size,
-                );
-                layers[i].neurons = Activation::relu(
-                        layers[i].sums,
-                        layers[i].size
-                ); 
-            } 
-            layers[i].neurons = Activation::r(
-                    sum_vector(
-                        initial_neurons * layers[i].weights,
-                        layers[i].bias_weights,
-                        layers[i].size,
-                    )
-             );
-        } else {
-            layers[i].neurons = sum_vector(
-                    layers[i-1].neurons * layers[i].weights,
-                    bias,
-                    layers[i].size,
-            );
-        }
-    }
-}*/
 
-void Network::forward_feed(double* initial_neurons) {
+void Network::forward_feed() {
     for (int i=0; i < size; ++i) {
         if (i == 0) {
             if (layers[i].act_func == "relu") {
@@ -56,13 +25,13 @@ void Network::forward_feed(double* initial_neurons) {
                         layers[i].bias_weights,
                         layers[i].size
                 );
-                layers[i].neurons = Activation::relu(
+                layers[i].neurons = act::relu(
                         layers[i].sums,
                         layers[i].size
                 ); 
             } 
             else if (layers[i].act_func == "sigmoid") {
-                layers[i].neurons = Activation::sigmoid(
+                layers[i].neurons = act::sigmoid(
                         Matrix::sum_vector(
                                 initial_neurons * layers[i].weights,
                                 layers[i].bias_weights,
@@ -71,7 +40,7 @@ void Network::forward_feed(double* initial_neurons) {
                         layers[i].size
                 );
             } else {
-                layers[i].neurons = Activation::softmax(
+                layers[i].neurons = act::softmax(
                         Matrix::sum_vector(
                                 initial_neurons * layers[i].weights,
                                 layers[i].bias_weights,
@@ -87,13 +56,13 @@ void Network::forward_feed(double* initial_neurons) {
                         layers[i].bias_weights,
                         layers[i].size
                 );
-                layers[i].neurons = Activation::relu(
+                layers[i].neurons = act::relu(
                         layers[i].sums,
                         layers[i].size
                 ); 
             } 
             else if (layers[i].act_func == "sigmoid") {
-                layers[i].neurons = Activation::sigmoid(
+                layers[i].neurons = act::sigmoid(
                         Matrix::sum_vector(
                                 layers[i-1].neurons * layers[i].weights,
                                 layers[i].bias_weights,
@@ -102,7 +71,7 @@ void Network::forward_feed(double* initial_neurons) {
                         layers[i].size
                 );
             } else {
-                layers[i].neurons = Activation::softmax(
+                layers[i].neurons = act::softmax(
                         Matrix::sum_vector(
                                 layers[i-1].neurons * layers[i].weights,
                                 layers[i].bias_weights,
@@ -115,43 +84,43 @@ void Network::forward_feed(double* initial_neurons) {
     }
 }
 
-void Network::back_propagation(double* result) {
-    layers[size - 1].neurons_err = new double[layers[size - 1].size];
+void Network::back_propagation(double* expected) {
+    layers[size - 1].de_ds = new double[layers[size - 1].size];
     if (loss_func == "crossentropy") {
         for (int i{0}; i < layers[size - 1].size; ++i) {
-            layers[size - 1].neurons_err[i] = layers[size - 1].neurons[i] - result[i];
+            layers[size - 1].de_ds[i] = layers[size - 1].neurons[i] - expected[i];
         }
     } else if (loss_func == "mse"){
         double* der;
         if (layers[size - 1].act_func == "relu"){
-            der = Derivative::relu(
+            der = der::relu(
                 layers[size - 1].sums,
                 layers[size - 1].size
             );
         } else if (layers[size - 1].act_func == "sigmoid") {
-            der = Derivative::sigmoid(
+            der = der::sigmoid(
                 layers[size - 1].neurons,
                 layers[size - 1].size
             );
         }
         for (int i{0}; i < layers[size - 1].size; ++i) {
-            layers[size - 1].neurons_err[i] = 2 * (layers[size - 1].neurons[i] - result[i]) * der[i];
+            layers[size - 1].de_ds[i] = 2 * (layers[size - 1].neurons[i] - expected[i]) * der[i];
         }
     }
     for (int i{size - 2}; i >= 0; --i) {
         if (layers[i].act_func == "relu") {
-            layers[i].neurons_err = Matrix::multy_elements(
-                layers[i + 1].weights * layers[i + 1].neurons_err,
-                Derivative::relu(
+            layers[i].de_ds = Matrix::multy_elements(
+                layers[i + 1].weights * layers[i + 1].de_ds,
+                der::relu(
                     layers[i].sums,
                     layers[i].size
                 ),
                 layers[i].size
             );
         } else if (layers[i].act_func == "sigmoid") {
-            layers[i].neurons_err = Matrix::multy_elements(
-                layers[i + 1].weights * layers[i + 1].neurons_err,
-                Derivative::sigmoid(
+            layers[i].de_ds = Matrix::multy_elements(
+                layers[i + 1].weights * layers[i + 1].de_ds,
+                der::sigmoid(
                     layers[i].neurons,
                     layers[i].size
                 ),
@@ -159,12 +128,38 @@ void Network::back_propagation(double* result) {
             );
         }
         else if (layers[i].act_func == "softmax"){
-            layers[i].neurons_err = layers[i + 1].weights *
-            layers[i + 1].neurons_err *
-            Derivative::softmax(
+            layers[i].de_ds = layers[i + 1].weights *
+            layers[i + 1].de_ds *
+            der::softmax(
                 layers[i].neurons, 
                 layers[i].size
             );
+        }
+    }
+}
+
+void Network::set_input(double* input) {
+    initial_neurons = input;
+}
+
+void Network::update_weights(double lr) {
+    for (int j=0; j<layers[0].weights.get_row(); ++j) {
+        for (int t=0; t<layers[0].weights.get_column(); ++t) {
+            layers[0].weights.elem(j, t) -= lr * initial_neurons[j] * layers[0].de_ds[t];
+        }
+        for (int t=0; t<layers[0].weights.get_column(); ++t) {
+            layers[0].bias_weights[t] -= lr * layers[0].de_ds[t]; 
+        }
+    }
+
+    for (int i=1; i<size; ++i) {
+        for (int j=0; j<layers[i].weights.get_row(); ++j) {
+            for (int t=0; t<layers[i].weights.get_column(); ++t) {
+                layers[i].weights.elem(j, t) -= lr * layers[i-1].neurons[j] * layers[i].de_ds[t];
+            }
+        }
+        for (int t=0; t<layers[i].weights.get_column(); ++t) {
+            layers[i].bias_weights[t] -= lr * layers[i].de_ds[t]; 
         }
     }
 }
