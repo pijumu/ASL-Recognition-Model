@@ -6,6 +6,11 @@
 #include "yaml-cpp/yaml.h"
 #include <fstream>
 
+enum LossFunc {
+    CrossEntropy,
+    MSE,
+};
+
 class Layer {
     // activation_function - название функции активации
     // size - кол-во нейронов в слою
@@ -29,7 +34,7 @@ class Layer {
 class Network {
   public:
     int size;
-    std::string loss_func;
+    LossFunc loss_func;
     std::vector<Layer> layers;
     double* initial_neurons;
       

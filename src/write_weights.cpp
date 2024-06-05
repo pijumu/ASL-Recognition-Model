@@ -1,18 +1,17 @@
-
 #include "Network.h"
 
 void Network::write_weights(const std::string& path) {
     std::ofstream fout("../" + path);
     YAML::Emitter emitter;
     emitter << YAML::BeginMap;
-    emitter << YAML::Key << "network size";
+    emitter << YAML::Key << "network_size";
     emitter << YAML::Value << size;
 
     emitter << YAML::Key << "layers";
     emitter<< YAML::BeginSeq;
     for (int index{0}; index < size; ++index) {
         emitter << YAML::BeginMap;
-        emitter << YAML::Key << "activate function";
+        emitter << YAML::Key << "activate_function";
         emitter << YAML::Value << layers[index].act_func;
         emitter << YAML::Key << "weights";
         emitter<<YAML::Value << YAML::BeginSeq;
@@ -38,6 +37,4 @@ void Network::write_weights(const std::string& path) {
     emitter<< YAML::EndSeq;
     fout << emitter.c_str();
     fout.close();
-
-    
 };

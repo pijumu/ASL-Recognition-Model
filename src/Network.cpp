@@ -10,9 +10,9 @@ Layer::Layer(std::string& act_func, int size, int row):
     act_func(act_func),
     size(size),
     weights(row, size),
-    bias_weights(new double[row]) {
-    for (int i=0; i < row; ++i) {
-        bias_weights[i] = ((std::rand() % 100)) * 0.007 / row;
+    bias_weights(new double[size]) {
+    for (int i=0; i < size; ++i) {
+        bias_weights[i] = ((std::rand() % 100)) * 0.007 / size;
     }
 }
 
@@ -86,11 +86,11 @@ void Network::forward_feed() {
 
 void Network::back_propagation(double* expected) {
     layers[size - 1].de_ds = new double[layers[size - 1].size];
-    if (loss_func == "crossentropy") {
+    if (loss_func == CrossEntropy) {
         for (int i{0}; i < layers[size - 1].size; ++i) {
             layers[size - 1].de_ds[i] = layers[size - 1].neurons[i] - expected[i];
         }
-    } else if (loss_func == "mse"){
+    } else if (loss_func == MSE){
         double* der;
         if (layers[size - 1].act_func == "relu"){
             der = der::relu(
@@ -138,18 +138,18 @@ void Network::back_propagation(double* expected) {
     }
 }
 
-void Network::set_input(double* input) {
-    initial_neurons = input;
+void Network::set_input(double* initial_neurons) {
+    this->initial_neurons = initial_neurons;
 }
 
-void Network::update_weights(double lr) {
+void Network::update_weights(const double lr) {
     for (int j=0; j<layers[0].weights.get_row(); ++j) {
         for (int t=0; t<layers[0].weights.get_column(); ++t) {
             layers[0].weights.elem(j, t) -= lr * initial_neurons[j] * layers[0].de_ds[t];
         }
-        for (int t=0; t<layers[0].weights.get_column(); ++t) {
-            layers[0].bias_weights[t] -= lr * layers[0].de_ds[t]; 
-        }
+    }
+    for (int t=0; t<layers[0].weights.get_column(); ++t) {
+        layers[0].bias_weights[t] -= lr * layers[0].de_ds[t];
     }
 
     for (int i=1; i<size; ++i) {
@@ -159,7 +159,19 @@ void Network::update_weights(double lr) {
             }
         }
         for (int t=0; t<layers[i].weights.get_column(); ++t) {
-            layers[i].bias_weights[t] -= lr * layers[i].de_ds[t]; 
+            layers[i].bias_weights[t] -= lr * layers[i].de_ds[t];
         }
     }
+}
+
+int Network::predict() {
+    int index = -1;
+    double max = 0.0;
+    for (int i=0; i<layers[size-1].size; ++i) {
+        if (layers[size-1].neurons[i] >= max) {
+            index = i;
+            max = layers[size-1].neurons[i];
+        }
+    }
+    return index;
 }
