@@ -2,6 +2,8 @@
 #include <opencv2/opencv.hpp>
 #include <filesystem>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 namespace fs = std::filesystem;
 
@@ -70,7 +72,8 @@ std::unordered_map<std::string, int> class_ind = {
 };
 
 int main() {
-    YAML::Node settings = YAML::LoadFile("../all_yaml_configs/settings_predict.yaml");
+    std::srand(std::time(nullptr));
+    YAML::Node settings = YAML::LoadFile("../all_yaml_configs/settings_train.yaml");
     auto network_cfg_path = settings["network_cfg_path"].as<std::string>();
     const auto train_or_predict = settings["train_or_predict"].as<std::string>();
     const auto data_folder = settings["data_folder"].as<std::string>();
@@ -89,25 +92,27 @@ int main() {
         }
         const auto output_file = settings["output_file"].as<std::string>();
         const int epochs = settings["epochs"].as<int>();
+        const int batch_size = settings["batch_size"].as<int>();
         auto* input = new double[1600];
         auto* ans = new double[29];
+        int our_batch = 0;
 
         for (int epoch=0; epoch < epochs; ++epoch) {
             std::cout << "starting epoch: " << epoch << '\n';
             double lr = 0.15*exp(-epoch/20.0);
-            for (const auto& entry : fs::directory_iterator(data_folder)) {
-                std::string p = entry.path();
-                p = p.substr(n+1, p.size());
-                for (int k=0; k<29; ++k) {
-                    if (k == class_ind[p]) {
-                        ans[k] = 1.0;
-                    } else {
-                        ans[k] = 0.0;
+            for (int k=1; k<3001; ++k) {
+                for (const auto& entry : fs::directory_iterator(data_folder)) {
+                    std::string p = entry.path();
+                    std::string c = p.substr(n+1, p.size());
+                    for (int k=0; k<29; ++k) {
+                        if (k == class_ind[c]) {
+                            ans[k] = 1.0;
+                        } else {
+                            ans[k] = 0.0;
+                        }
                     }
-                }
-
-                for (const auto& img : fs::directory_iterator(entry)) {
-                    cv::Mat image = cv::imread(img.path());
+                    p += "/" + p.substr(n+1, p.size()) + std::to_string(k) + ".jpg";
+                    cv::Mat image = cv::imread(p);
                     int input_index = 0;
                     for (int i=0; i<40; ++i) {
                         for (int j=0; j<40; ++j) {
@@ -116,11 +121,15 @@ int main() {
                             ++input_index;
                         }
                     }
-
+                    ++our_batch;
                     asl.set_input(input);
                     asl.forward_feed();
                     asl.back_propagation(ans);
-                    asl.update_weights(lr);
+                    if (our_batch == batch_size) {
+                        our_batch = 0;
+                        asl.update_weights(lr);
+                        //std::cout << "updating weights" << '\n';
+                    }
                 }
             }
         }

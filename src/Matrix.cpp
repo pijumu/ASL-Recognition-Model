@@ -1,42 +1,70 @@
 #include "Matrix.h"
 
-Matrix::Matrix(int row, int column): row(row), column(column), elements(new double* [row]) {
+// Конструкторы
+Matrix::Matrix(const int row, const int column): row(row), column(column), elements(new double* [row])
+{
     for (int i{0}; i < row; ++i) {
         elements[i] = new double [column];
-    }
-    for (int i{0}; i < row; ++i) {
         for (int j{0}; j < column; ++j) {
-            elements[i][j] = ((std::rand() % 100)) * 0.007 / (row + column);
+            elements[i][j] = ((std::rand() % 100)) * 0.007 / (row + column); // NOLINT(*-msc50-cpp)
         }
     }
 }
 
-Matrix::Matrix(int row, int column, double** elements): row(row), column(column), elements(elements) {}
+Matrix::Matrix(const int row, const int column, double** elements): row(row), column(column), elements(elements)
+{}
 
-int Matrix::get_row() const {
+Matrix::Matrix(const int row, const int column, const double elem): row(row), column(column), elements(new double* [row])
+{
+    for (int i{0}; i < row; ++i) {
+        elements[i] = new double [column];
+        for (int j{0}; j < column; ++j) {
+            elements[i][j] = elem; // NOLINT(*-msc50-cpp)
+        }
+    }
+}
+
+// Работа с полями
+int Matrix::get_row() const
+{
     return Matrix::row;
 }
 
-int Matrix::get_column() const {
+int Matrix::get_column() const
+{
     return Matrix::column;
 }
 
-double Matrix::element(int i, int j) const {
+double Matrix::element(int i, int j) const
+{
     return Matrix::elements[i][j];
 }
 
-double& Matrix::elem(int i, int j) {
+double& Matrix::elem(int i, int j)
+{
     return Matrix::elements[i][j];
 }
 
-double* Matrix::sum_vector(double* vector_1, const double* vector_2, int size) {
+// Работа с векторами
+double* Matrix::sum_vector(double* vector_1, const double* vector_2, int size)
+{
     for (int i{0}; i < size; ++i) {
         vector_1[i] += vector_2[i];
     }
     return vector_1;
 }
 
-Matrix operator*(const Matrix& matrix1, const Matrix& matrix2) {
+double* Matrix::multy_elements(double* vector_1, const double* vector_2, int size)
+{
+    for (int i{0}; i < size; ++i) {
+        vector_1[i] = vector_1[i] * vector_2[i];
+    }
+    return vector_1;
+}
+
+//Работа с матрицами
+Matrix operator*(const Matrix& matrix1, const Matrix& matrix2)
+{
     auto** elems = new double* [matrix1.get_row()];
     for (int i{0}; i < matrix1.get_row(); ++i) {
         elems[i] = new double [matrix2.get_column()];
@@ -52,7 +80,8 @@ Matrix operator*(const Matrix& matrix1, const Matrix& matrix2) {
     return Matrix {matrix1.get_row(), matrix2.get_column(), elems};
 }
 
-double* operator*(const Matrix& matrix, const double* vector) {
+double* operator*(const Matrix& matrix, const double* vector)
+{
     auto* result = new double[matrix.get_row()];
     for (int i{0}; i < matrix.get_row(); ++i) {
         double value{0};
@@ -64,7 +93,8 @@ double* operator*(const Matrix& matrix, const double* vector) {
     return result;
 }
 
-double* operator*(const double* vector, const Matrix& matrix) {
+double* operator*(const double* vector, const Matrix& matrix)
+{
     auto* result = new double[matrix.get_column()];
     for (int j{0}; j < matrix.get_column(); ++j) {
         double value{0};
@@ -74,10 +104,4 @@ double* operator*(const double* vector, const Matrix& matrix) {
         result[j] = value;
     }
     return result;
-}
-double* Matrix::multy_elements(double* vector_1, const double* vector_2, int size) {
-    for (int i{0}; i < size; ++i) {
-        vector_1[i] = vector_1[i] * vector_2[i];
-    }
-    return vector_1;
 }
