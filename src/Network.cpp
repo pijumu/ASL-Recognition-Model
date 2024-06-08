@@ -9,7 +9,7 @@ Layer::Layer(const std::string& act_func, int size, Matrix& weights, double* bia
     bias_gradient(new double[size]{})
 {}
 
-Layer::Layer(std::string& act_func, int size, int row):
+Layer::Layer(std::string& act_func, int row, int size):
     act_func(act_func),
     size(size),
     weights(row, size),

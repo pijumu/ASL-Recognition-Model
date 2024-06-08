@@ -13,11 +13,11 @@
 namespace der {
     /**
      * @brief Calculate the derivative of the Rectified Linear Unit (ReLU) activation function.
-     * @param sums Pointer to an array containing the sum of inputs to the ReLU function.
+     * @param neurons Pointer to an array containing the output values of the ReLU function.
      * @param size The size of the input array.
      * @return A pointer to an array containing the derivatives of the ReLU function.
      */
-    double* relu(const double* sums, int size);
+    double* relu(const double* neurons, int size);
 
     /**
      * @brief Calculate the derivative of the Sigmoid activation function.

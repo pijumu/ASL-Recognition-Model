@@ -1,13 +1,13 @@
 #include "Derivative.h"
 
 namespace der {
-    double* relu(const double* sums, int size){
+    double* relu(const double* neurons, int size){
         auto* relu_neurons = new double[size];
         for (int i{0}; i < size; ++i) {
-            if (0 < sums[i] and sums[i] > 1) {
+            if (neurons[i] > 0) {
                 relu_neurons[i] = 0.01;
             } else {
-                relu_neurons[i] = 1;
+                relu_neurons[i] = 0.0;
             }
         }
         return relu_neurons;

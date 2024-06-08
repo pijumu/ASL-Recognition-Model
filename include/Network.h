@@ -54,7 +54,7 @@ public:
   * @param size The number of neurons in the layer.
   * @param row Number of rows for input weights matrix.
   */
- Layer(std::string& act_func, int size, int row);
+ Layer(std::string& act_func, int row, int size);
 };
 
 /**

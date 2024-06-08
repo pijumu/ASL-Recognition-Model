@@ -79,7 +79,6 @@ int main() {
     const auto data_folder = settings["data_folder"].as<std::string>();
     const int n = data_folder.size();
     Network asl (network_cfg_path, train_or_predict);
-
     if (train_or_predict == "train") {
         for (const auto& entry : fs::directory_iterator(data_folder)) {
             for (const auto& img : fs::directory_iterator(entry)) {
@@ -99,16 +98,16 @@ int main() {
 
         for (int epoch=0; epoch < epochs; ++epoch) {
             std::cout << "starting epoch: " << epoch << '\n';
-            double lr = 0.15*exp(-epoch/20.0);
+            double lr = 0.3*exp(-epoch/20.0);
             for (int k=1; k<3001; ++k) {
                 for (const auto& entry : fs::directory_iterator(data_folder)) {
                     std::string p = entry.path();
                     std::string c = p.substr(n+1, p.size());
-                    for (int k=0; k<29; ++k) {
-                        if (k == class_ind[c]) {
-                            ans[k] = 1.0;
+                    for (int m=0; m<29; ++m) {
+                        if (m == class_ind[c]) {
+                            ans[m] = 1.0;
                         } else {
-                            ans[k] = 0.0;
+                            ans[m] = 0.0;
                         }
                     }
                     p += "/" + p.substr(n+1, p.size()) + std::to_string(k) + ".jpg";
@@ -128,7 +127,6 @@ int main() {
                     if (our_batch == batch_size) {
                         our_batch = 0;
                         asl.update_weights(lr);
-                        //std::cout << "updating weights" << '\n';
                     }
                 }
             }

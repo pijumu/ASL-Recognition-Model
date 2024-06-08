@@ -1,4 +1,5 @@
 #include "Network.h"
+#include <iostream>
 
 Network::Network(const std::string& path, const std::string& train_or_predict) {
     YAML::Node config = YAML::LoadFile("../" + path);    
@@ -29,8 +30,7 @@ Network::Network(const std::string& path, const std::string& train_or_predict) {
             int layer_size = static_cast<int> (layer_config["bias"].size());
             Layer layer{activate_function, layer_size, matrix, bias};
             layers.push_back(layer);
-
-        } else if(train_or_predict == "train") {
+        } else if (train_or_predict == "train") {
             int size_of_initial_neurons = config["size_of_initial_neurons"].as<int>();
             int layer_size = layer_config["layer_size"].as<int>();
             int row;
@@ -39,7 +39,8 @@ Network::Network(const std::string& path, const std::string& train_or_predict) {
             } else {
                 row = layers[index - 1].size;
             }
-            Layer layer{activate_function, layer_size, row};
+
+            Layer layer{activate_function, row, layer_size};\
             layers.push_back(layer);
         }
 
@@ -49,4 +50,4 @@ Network::Network(const std::string& path, const std::string& train_or_predict) {
             loss_func = MSE;
         }
     }
-};
+}

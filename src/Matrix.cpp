@@ -6,7 +6,7 @@ Matrix::Matrix(const int row, const int column): row(row), column(column), eleme
     for (int i{0}; i < row; ++i) {
         elements[i] = new double [column];
         for (int j{0}; j < column; ++j) {
-            elements[i][j] = ((std::rand() % 100)) * 0.007 / (row + column); // NOLINT(*-msc50-cpp)
+            elements[i][j] = ((std::rand()%100)*0.0007);
         }
     }
 }
