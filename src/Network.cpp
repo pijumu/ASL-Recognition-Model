@@ -27,13 +27,12 @@ void Network::forward_feed()
     for (int i=0; i < size; ++i) {
         if (i == 0) {
             if (layers[i].act_func == "relu") {
-                layers[i].sums = Matrix::sum_vector(
+                layers[i].neurons = act::relu(
+                    Matrix::sum_vector(
                         initial_neurons * layers[i].weights,
                         layers[i].bias_weights,
                         layers[i].size
-                );
-                layers[i].neurons = act::relu(
-                        layers[i].sums,
+                    ),
                         layers[i].size
                 ); 
             } 
@@ -58,17 +57,15 @@ void Network::forward_feed()
             }
         } else {
             if (layers[i].act_func == "relu") {
-                layers[i].sums = Matrix::sum_vector(
+                layers[i].neurons = act::relu(
+                    Matrix::sum_vector(
                         layers[i-1].neurons * layers[i].weights,
                         layers[i].bias_weights,
                         layers[i].size
-                );
-                layers[i].neurons = act::relu(
-                        layers[i].sums,
-                        layers[i].size
+                    ),
+                    layers[i].size
                 ); 
-            } 
-            else if (layers[i].act_func == "sigmoid") {
+            } else if (layers[i].act_func == "sigmoid") {
                 layers[i].neurons = act::sigmoid(
                         Matrix::sum_vector(
                                 layers[i-1].neurons * layers[i].weights,
@@ -102,7 +99,7 @@ void Network::back_propagation(double* expected)
         double* der;
         if (layers[size - 1].act_func == "relu"){
             der = der::relu(
-                layers[size - 1].sums,
+                layers[size - 1].neurons,
                 layers[size - 1].size
             );
         } else if (layers[size - 1].act_func == "sigmoid") {
@@ -120,7 +117,7 @@ void Network::back_propagation(double* expected)
             layers[i].de_ds = Matrix::multy_elements(
                 layers[i + 1].weights * layers[i + 1].de_ds,
                 der::relu(
-                    layers[i].sums,
+                    layers[i].neurons,
                     layers[i].size
                 ),
                 layers[i].size

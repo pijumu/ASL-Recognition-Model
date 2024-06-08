@@ -98,7 +98,7 @@ int main() {
 
         for (int epoch=0; epoch < epochs; ++epoch) {
             std::cout << "starting epoch: " << epoch << '\n';
-            double lr = 0.3*exp(-epoch/20.0);
+            double lr = 0.6*(1-static_cast<double>(epoch)/12);
             for (int k=1; k<3001; ++k) {
                 for (const auto& entry : fs::directory_iterator(data_folder)) {
                     std::string p = entry.path();

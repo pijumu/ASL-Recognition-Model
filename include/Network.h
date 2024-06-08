@@ -37,7 +37,6 @@ public:
  double* bias_gradient; /**< Array of gradients for bias weight updates. */
  double* neurons; /**< Array of output values from the neurons in the layer. */
  double* de_ds; /**< Array of derivatives of the activation function with respect to the summed inputs. */
- double* sums; /**< Array of summed inputs (for ReLU activation function). */
 
  /**
   * @brief Constructor for Layer class with specified activation function, size, weights, and bias.

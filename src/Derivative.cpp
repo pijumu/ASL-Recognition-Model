@@ -16,7 +16,7 @@ namespace der {
     double* sigmoid(const double* neurons, int size){
         auto* sigmoid_neurons = new double[size];
         for (int i{0}; i < size; ++i){
-            sigmoid_neurons[i] = pow(M_E, -neurons[i])/pow(1 + pow(M_E, -neurons[i]), 2);
+            sigmoid_neurons[i] = neurons[i]*(1-neurons[i]);
         }
         return sigmoid_neurons;
     }
