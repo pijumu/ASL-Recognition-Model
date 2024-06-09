@@ -73,10 +73,10 @@ std::unordered_map<std::string, int> class_ind = {
 
 int main() {
     std::srand(std::time(nullptr));
-    YAML::Node settings = YAML::LoadFile("../all_yaml_configs/settings_train.yaml");
+    YAML::Node settings = YAML::LoadFile("../all_yaml_configs/settings_predict.yaml");
     auto network_cfg_path = settings["network_cfg_path"].as<std::string>();
     const auto train_or_predict = settings["train_or_predict"].as<std::string>();
-    const auto data_folder = settings["data_folder"].as<std::string>();
+    const auto data_folder = ".." + settings["data_folder"].as<std::string>();
     const int n = data_folder.size();
     Network asl (network_cfg_path, train_or_predict);
     if (train_or_predict == "train") {
@@ -94,12 +94,13 @@ int main() {
         const int batch_size = settings["batch_size"].as<int>();
         auto* input = new double[1600];
         auto* ans = new double[29];
+        auto probability = settings["dropout_probability"].as<double>();
         int our_batch = 0;
-
+        asl.dropout_mask(probability);
         for (int epoch=0; epoch < epochs; ++epoch) {
             std::cout << "starting epoch: " << epoch << '\n';
-            double lr = 0.6*(1-static_cast<double>(epoch)/12);
-            for (int k=1; k<3001; ++k) {
+            double lr=0.001;
+            for (int k=1; k<1001; ++k) {
                 for (const auto& entry : fs::directory_iterator(data_folder)) {
                     std::string p = entry.path();
                     std::string c = p.substr(n+1, p.size());
@@ -127,6 +128,7 @@ int main() {
                     if (our_batch == batch_size) {
                         our_batch = 0;
                         asl.update_weights(lr);
+                        asl.dropout_mask(probability);
                     }
                 }
             }

@@ -1,4 +1,5 @@
 #include "Network.h"
+#include <random>
 
 Layer::Layer(const std::string& act_func, int size, Matrix& weights, double* bias_weights):
     act_func(act_func),
@@ -6,8 +7,13 @@ Layer::Layer(const std::string& act_func, int size, Matrix& weights, double* bia
     weights(weights),
     gradient(weights.get_row(), size, 0.0),
     bias_weights(bias_weights),
-    bias_gradient(new double[size]{})
-{}
+    bias_gradient(new double[size]{}),
+    dropout_mask(new double[size])
+{
+    for (int i=0; i<size;++i) {
+        dropout_mask[i] = 1.0;
+    }
+}
 
 Layer::Layer(std::string& act_func, int row, int size):
     act_func(act_func),
@@ -15,15 +21,23 @@ Layer::Layer(std::string& act_func, int row, int size):
     weights(row, size),
     gradient(row, size, 0.0),
     bias_weights(new double[size]),
-    bias_gradient(new double[size]{})
+    bias_gradient(new double[size]{}),
+    dropout_mask(new double[size])
 {
     for (int i=0; i < size; ++i) {
-        bias_weights[i] = ((std::rand() % 100)) * 0.007 / size;
+        bias_weights[i] = ((std::rand() % 10)) * 0.0007 / size;
+        dropout_mask[i] = 1.0;
+
     }
 }
 
 void Network::forward_feed()
 {
+    initial_neurons = Matrix::multy_elements(
+                initial_neurons,
+                dropout_ini_mask,
+                layers[0].weights.get_row()
+    );
     for (int i=0; i < size; ++i) {
         if (i == 0) {
             if (layers[i].act_func == "relu") {
@@ -35,8 +49,7 @@ void Network::forward_feed()
                     ),
                         layers[i].size
                 ); 
-            } 
-            else if (layers[i].act_func == "sigmoid") {
+            } else if (layers[i].act_func == "sigmoid") {
                 layers[i].neurons = act::sigmoid(
                         Matrix::sum_vector(
                                 initial_neurons * layers[i].weights,
@@ -85,6 +98,13 @@ void Network::forward_feed()
                 );
             }
         }
+        if (i < size-1) {
+            layers[i].neurons = Matrix::multy_elements(
+                layers[i].neurons,
+                layers[i].dropout_mask,
+                layers[i].size
+            );
+        }
     }
 }
 
@@ -109,7 +129,7 @@ void Network::back_propagation(double* expected)
             );
         }
         for (int i{0}; i < layers[size - 1].size; ++i) {
-            layers[size - 1].de_ds[i] = 2 * (layers[size - 1].neurons[i] - expected[i]) * der[i];
+            layers[size - 1].de_ds[i] = 2 * (layers[size - 1].neurons[i] - expected[i]) * der[i] / static_cast<double>(size);
         }
     }
     for (int i{size - 2}; i >= 0; --i) {
@@ -156,8 +176,8 @@ void Network::back_propagation(double* expected)
                 layers[i].gradient.elem(j, t) -= layers[i-1].neurons[j] * layers[i].de_ds[t];
             }
         }
-        for (int t=0; t<layers[i].gradient.get_column(); ++t) {
-            layers[i].bias_gradient[t] -= layers[i].de_ds[t];
+        for (int k=0; k<layers[i].gradient.get_column(); ++k) {
+            layers[i].bias_gradient[k] -= layers[i].de_ds[k];
         }
     }
 }
@@ -194,4 +214,28 @@ int Network::predict()
         }
     }
     return index;
+}
+
+void Network::dropout_mask(double p) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+
+    for (int i=0; i<size-1 ; ++i) {
+        for (int j=0; j<layers[i].size; ++j) {
+            if (const double random_value = dis(gen); random_value <= p) {
+                layers[i].dropout_mask[j] = 0.0;
+            } else {
+                layers[i].dropout_mask[j] = 1.0;
+            }
+        }
+    }
+    dropout_ini_mask = new double[layers[0].weights.get_row()];
+    for (int x=0; x < layers[0].weights.get_row(); ++x) {
+        if (const double random_value = dis(gen); random_value <= p) {
+            dropout_ini_mask[x] = 0.0;
+        } else {
+            dropout_ini_mask[x] = 1.0;
+        }
+    }
 }

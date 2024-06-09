@@ -15,7 +15,7 @@
 class Matrix {
 public:
  /**
-  * @brief Constructor for creating a matrix with specified number of rows and columns.
+  * @brief Constructor for creating a matrix with specified number of rows and columns and with random values.
   * @param row The number of rows in the matrix.
   * @param column The number of columns in the matrix.
   */

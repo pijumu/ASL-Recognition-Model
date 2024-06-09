@@ -37,6 +37,7 @@ public:
  double* bias_gradient; /**< Array of gradients for bias weight updates. */
  double* neurons; /**< Array of output values from the neurons in the layer. */
  double* de_ds; /**< Array of derivatives of the activation function with respect to the summed inputs. */
+ double* dropout_mask; /**< Array of 0 and 1 representing the dropout mask. */
 
  /**
   * @brief Constructor for Layer class with specified activation function, size, weights, and bias.
@@ -50,8 +51,8 @@ public:
  /**
   * @brief Constructor for Layer class with specified activation function, size, and number of input rows.
   * @param act_func The activation function for the layer.
-  * @param size The number of neurons in the layer.
   * @param row Number of rows for input weights matrix.
+  * @param size The number of neurons in the layer.
   */
  Layer(std::string& act_func, int row, int size);
 };
@@ -66,6 +67,7 @@ public:
  LossFunc loss_func; /**< Loss function used for training the network. */
  std::vector<Layer> layers; /**< Vector containing all layers in the network. */
  double* initial_neurons; /**< Array of initial input values to the network. */
+ double* dropout_ini_mask; /**< Array of 0 and 1 representing the dropout mask for initial neurons. */
 
  /**
   * @brief Constructor for Network class that loads network configuration from a YAML file.
@@ -108,5 +110,12 @@ public:
   * @param path Path to write the updated weights.
   */
  void write_weights(const std::string& path);
+
+ /**
+  * @brief Creates a dropout mask for use in neural networks.
+  * @param p The probability of setting an element of the mask to zero. Each element of the mask will be set to zero with probability p,
+  *          and left unchanged with probability (1 - p).
+  */
+ void dropout_mask(double p);
 };
 #endif

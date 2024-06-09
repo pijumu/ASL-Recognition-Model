@@ -5,7 +5,7 @@ namespace der {
         auto* relu_neurons = new double[size];
         for (int i{0}; i < size; ++i) {
             if (neurons[i] > 0) {
-                relu_neurons[i] = 0.01;
+                relu_neurons[i] = 0.1;
             } else {
                 relu_neurons[i] = 0.0;
             }

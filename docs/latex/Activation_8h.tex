@@ -1,0 +1,99 @@
+\hypertarget{Activation_8h}{}\doxysection{include/\+Activation.h File Reference}
+\label{Activation_8h}\index{include/Activation.h@{include/Activation.h}}
+
+
+This file contains declarations of activation functions for neural networks.  
+
+
+{\ttfamily \#include $<$cmath$>$}\newline
+Include dependency graph for Activation.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{Activation_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{Activation_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \mbox{\hyperlink{Activation_8h_a8e8f93c508312335ed54c4f4a1827e8d}{act\+::softmax}} (double $\ast$sums, int size)
+\begin{DoxyCompactList}\small\item\em Applies the softmax activation function to an array of sums. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{Activation_8h_aab9d5d18a1e70fc271235b658f0e1758}{act\+::relu}} (double $\ast$sums, int size)
+\begin{DoxyCompactList}\small\item\em Applies the Re\+LU (Rectified Linear Unit) activation function to an array of sums. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{Activation_8h_aa11fb159fbeda06381db7f3ddb52c7b7}{act\+::sigmoid}} (double $\ast$sums, int size)
+\begin{DoxyCompactList}\small\item\em Applies the sigmoid activation function to an array of sums. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains declarations of activation functions for neural networks. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Activation_8h_aab9d5d18a1e70fc271235b658f0e1758}\label{Activation_8h_aab9d5d18a1e70fc271235b658f0e1758}} 
+\index{Activation.h@{Activation.h}!relu@{relu}}
+\index{relu@{relu}!Activation.h@{Activation.h}}
+\doxysubsubsection{\texorpdfstring{relu()}{relu()}}
+{\footnotesize\ttfamily double$\ast$ act\+::relu (\begin{DoxyParamCaption}\item[{double $\ast$}]{sums,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Applies the Re\+LU (Rectified Linear Unit) activation function to an array of sums. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sums} & An array of sums. \\
+\hline
+{\em size} & The size of the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to an array of doubles containing the Re\+LU values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Activation_8h_aa11fb159fbeda06381db7f3ddb52c7b7}\label{Activation_8h_aa11fb159fbeda06381db7f3ddb52c7b7}} 
+\index{Activation.h@{Activation.h}!sigmoid@{sigmoid}}
+\index{sigmoid@{sigmoid}!Activation.h@{Activation.h}}
+\doxysubsubsection{\texorpdfstring{sigmoid()}{sigmoid()}}
+{\footnotesize\ttfamily double$\ast$ act\+::sigmoid (\begin{DoxyParamCaption}\item[{double $\ast$}]{sums,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Applies the sigmoid activation function to an array of sums. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sums} & An array of sums. \\
+\hline
+{\em size} & The size of the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to an array of doubles containing the sigmoid values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Activation_8h_a8e8f93c508312335ed54c4f4a1827e8d}\label{Activation_8h_a8e8f93c508312335ed54c4f4a1827e8d}} 
+\index{Activation.h@{Activation.h}!softmax@{softmax}}
+\index{softmax@{softmax}!Activation.h@{Activation.h}}
+\doxysubsubsection{\texorpdfstring{softmax()}{softmax()}}
+{\footnotesize\ttfamily double$\ast$ act\+::softmax (\begin{DoxyParamCaption}\item[{double $\ast$}]{sums,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Applies the softmax activation function to an array of sums. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sums} & An array of sums. \\
+\hline
+{\em size} & The size of the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to an array of doubles containing the softmax values. 
+\end{DoxyReturn}

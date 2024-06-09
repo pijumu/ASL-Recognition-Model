@@ -15,7 +15,7 @@ namespace act {
 
     double* relu(double* sums, int size) {
         for (int i{0}; i < size; ++i) {
-            sums[i] = std::max(0.0, 0.01*sums[i]);
+            sums[i] = std::max(0.0, 0.1*sums[i]);
         }
         return sums;
     }

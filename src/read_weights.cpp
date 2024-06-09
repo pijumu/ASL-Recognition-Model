@@ -40,14 +40,17 @@ Network::Network(const std::string& path, const std::string& train_or_predict) {
                 row = layers[index - 1].size;
             }
 
-            Layer layer{activate_function, row, layer_size};\
+            Layer layer{activate_function, row, layer_size};
             layers.push_back(layer);
         }
-
         if (index == size - 1 && activate_function == "softmax") {
             loss_func = CrossEntropy;
         } else if (index == size - 1 && activate_function != "softmax") {
             loss_func = MSE;
         }
+    }
+    dropout_ini_mask = new double[layers[0].weights.get_row()];
+    for (int i=0; i<layers[0].weights.get_row(); ++i) {
+        dropout_ini_mask[i] = 1.0;
     }
 }
