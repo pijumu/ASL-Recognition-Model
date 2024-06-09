@@ -1,0 +1,206 @@
+\hypertarget{classMatrix}{}\doxysection{Matrix Class Reference}
+\label{classMatrix}\index{Matrix@{Matrix}}
+
+
+A class to represent a matrix and perform matrix operations.  
+
+
+
+
+{\ttfamily \#include $<$Matrix.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMatrix_a6a8f06cdfcb5935cae2354a6ee7b5866}{Matrix}} (int row, int column)
+\begin{DoxyCompactList}\small\item\em Constructor for creating a matrix with specified number of rows and columns and with random values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMatrix_a75c8eff0dd64bc1eb741fd7756b04b2a}{Matrix}} (int row, int column, double $\ast$$\ast$elements)
+\begin{DoxyCompactList}\small\item\em Constructor for creating a matrix with specified elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMatrix_a8792633ca335d3a66cc11320cda6fd1f}{Matrix}} (int row, int column, double \mbox{\hyperlink{classMatrix_a1e89084425f8774782abc93ecd920fc0}{elem}})
+\begin{DoxyCompactList}\small\item\em Constructor for creating a matrix with all elements set to a specified value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classMatrix_a5ef06d595f849d4e12507c27fc98ea5a}{get\+\_\+row}} () const
+\item 
+int \mbox{\hyperlink{classMatrix_a8402bbfb9d6aed07d8b124f423fdbff7}{get\+\_\+column}} () const
+\item 
+double \mbox{\hyperlink{classMatrix_afa1aad2a15f3d91c92877c71d41a2324}{element}} (int i, int j) const
+\begin{DoxyCompactList}\small\item\em Get the value of a specific element in the matrix. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classMatrix_a1e89084425f8774782abc93ecd920fc0}{elem}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Get a reference to a specific element in the matrix for modification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double $\ast$ \mbox{\hyperlink{classMatrix_acaf16ca42d6d9b3b8ddceb3304f8c22c}{multy\+\_\+elements}} (double $\ast$vector\+\_\+1, const double $\ast$vector\+\_\+2, int size)
+\begin{DoxyCompactList}\small\item\em Multiplies each element of two vectors element-\/wise. \end{DoxyCompactList}\item 
+static double $\ast$ \mbox{\hyperlink{classMatrix_aaa1dbe2465d67466ad51301cd682fee3}{sum\+\_\+vector}} (double $\ast$vector\+\_\+1, const double $\ast$vector\+\_\+2, int size)
+\begin{DoxyCompactList}\small\item\em Adds two vectors element-\/wise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to represent a matrix and perform matrix operations. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMatrix_a6a8f06cdfcb5935cae2354a6ee7b5866}\label{classMatrix_a6a8f06cdfcb5935cae2354a6ee7b5866}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{column }\end{DoxyParamCaption})}
+
+
+
+Constructor for creating a matrix with specified number of rows and columns and with random values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The number of rows in the matrix. \\
+\hline
+{\em column} & The number of columns in the matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_a75c8eff0dd64bc1eb741fd7756b04b2a}\label{classMatrix_a75c8eff0dd64bc1eb741fd7756b04b2a}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{column,  }\item[{double $\ast$$\ast$}]{elements }\end{DoxyParamCaption})}
+
+
+
+Constructor for creating a matrix with specified elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The number of rows in the matrix. \\
+\hline
+{\em column} & The number of columns in the matrix. \\
+\hline
+{\em elements} & A 2D array containing the elements of the matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_a8792633ca335d3a66cc11320cda6fd1f}\label{classMatrix_a8792633ca335d3a66cc11320cda6fd1f}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{column,  }\item[{double}]{elem }\end{DoxyParamCaption})}
+
+
+
+Constructor for creating a matrix with all elements set to a specified value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The number of rows in the matrix. \\
+\hline
+{\em column} & The number of columns in the matrix. \\
+\hline
+{\em elem} & The value to set for all elements of the matrix. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMatrix_a1e89084425f8774782abc93ecd920fc0}\label{classMatrix_a1e89084425f8774782abc93ecd920fc0}} 
+\index{Matrix@{Matrix}!elem@{elem}}
+\index{elem@{elem}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{elem()}{elem()}}
+{\footnotesize\ttfamily double\& Matrix\+::elem (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Get a reference to a specific element in the matrix for modification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The row index of the element. \\
+\hline
+{\em j} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the element at the specified position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_afa1aad2a15f3d91c92877c71d41a2324}\label{classMatrix_afa1aad2a15f3d91c92877c71d41a2324}} 
+\index{Matrix@{Matrix}!element@{element}}
+\index{element@{element}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{element()}{element()}}
+{\footnotesize\ttfamily double Matrix\+::element (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Get the value of a specific element in the matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The row index of the element. \\
+\hline
+{\em j} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the element at the specified position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_a8402bbfb9d6aed07d8b124f423fdbff7}\label{classMatrix_a8402bbfb9d6aed07d8b124f423fdbff7}} 
+\index{Matrix@{Matrix}!get\_column@{get\_column}}
+\index{get\_column@{get\_column}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{get\_column()}{get\_column()}}
+{\footnotesize\ttfamily int Matrix\+::get\+\_\+column (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The number of columns in the matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_a5ef06d595f849d4e12507c27fc98ea5a}\label{classMatrix_a5ef06d595f849d4e12507c27fc98ea5a}} 
+\index{Matrix@{Matrix}!get\_row@{get\_row}}
+\index{get\_row@{get\_row}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{get\_row()}{get\_row()}}
+{\footnotesize\ttfamily int Matrix\+::get\+\_\+row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The number of rows in the matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_acaf16ca42d6d9b3b8ddceb3304f8c22c}\label{classMatrix_acaf16ca42d6d9b3b8ddceb3304f8c22c}} 
+\index{Matrix@{Matrix}!multy\_elements@{multy\_elements}}
+\index{multy\_elements@{multy\_elements}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{multy\_elements()}{multy\_elements()}}
+{\footnotesize\ttfamily static double$\ast$ Matrix\+::multy\+\_\+elements (\begin{DoxyParamCaption}\item[{double $\ast$}]{vector\+\_\+1,  }\item[{const double $\ast$}]{vector\+\_\+2,  }\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Multiplies each element of two vectors element-\/wise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+1} & The first vector. \\
+\hline
+{\em vector\+\_\+2} & The second vector. \\
+\hline
+{\em size} & The size of the vectors. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to an array containing the result of element-\/wise multiplication. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_aaa1dbe2465d67466ad51301cd682fee3}\label{classMatrix_aaa1dbe2465d67466ad51301cd682fee3}} 
+\index{Matrix@{Matrix}!sum\_vector@{sum\_vector}}
+\index{sum\_vector@{sum\_vector}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{sum\_vector()}{sum\_vector()}}
+{\footnotesize\ttfamily static double$\ast$ Matrix\+::sum\+\_\+vector (\begin{DoxyParamCaption}\item[{double $\ast$}]{vector\+\_\+1,  }\item[{const double $\ast$}]{vector\+\_\+2,  }\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Adds two vectors element-\/wise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector\+\_\+1} & The first vector. \\
+\hline
+{\em vector\+\_\+2} & The second vector. \\
+\hline
+{\em size} & The size of the vectors. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to an array containing the result of element-\/wise addition. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{Matrix_8h}{Matrix.\+h}}\end{DoxyCompactItemize}
