@@ -1,8 +1,8 @@
 #include "Derivative.h"
 
 namespace der {
-    double* relu(const double* neurons, int size){
-        auto* relu_neurons = new double[size];
+    double *relu(const double *neurons, int size) {
+        auto *relu_neurons = new double[size];
         for (int i{0}; i < size; ++i) {
             if (neurons[i] > 0) {
                 relu_neurons[i] = 0.1;
@@ -13,16 +13,16 @@ namespace der {
         return relu_neurons;
     }
 
-    double* sigmoid(const double* neurons, int size){
-        auto* sigmoid_neurons = new double[size];
-        for (int i{0}; i < size; ++i){
-            sigmoid_neurons[i] = neurons[i]*(1-neurons[i]);
+    double *sigmoid(const double *neurons, int size) {
+        auto *sigmoid_neurons = new double[size];
+        for (int i{0}; i < size; ++i) {
+            sigmoid_neurons[i] = neurons[i] * (1 - neurons[i]);
         }
         return sigmoid_neurons;
     }
 
-    Matrix softmax(const double* neurons, int size){
-        auto** softmax_neurons = new double*[size];
+    Matrix softmax(const double *neurons, int size) {
+        auto **softmax_neurons = new double *[size];
         for (int i{0}; i < size; ++i) {
             softmax_neurons[i] = new double[size];
             for (int j{0}; j < size; ++j) {
@@ -33,6 +33,6 @@ namespace der {
                 }
             }
         }
-        return Matrix {size, size, softmax_neurons};
+        return Matrix{size, size, softmax_neurons};
     }
 }
