@@ -1,0 +1,12 @@
+<map id="include/Network.h" name="include/Network.h">
+<area shape="rect" id="node1" title="This file contains the declaration of classes for implementing neural network layers and network oper..." alt="" coords="240,5,380,32"/>
+<area shape="rect" id="node2" href="$Matrix_8h.html" title="This file contains the declaration of the Matrix class and related functions for matrix operations." alt="" coords="5,155,81,181"/>
+<area shape="rect" id="node4" href="$Derivative_8h.html" title="This file contains the declaration of functions for calculating derivatives of activation functions." alt="" coords="68,80,171,107"/>
+<area shape="rect" id="node6" title=" " alt="" coords="195,80,254,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="279,80,341,107"/>
+<area shape="rect" id="node8" href="$Activation_8h.html" title="This file contains declarations of activation functions for neural networks." alt="" coords="365,80,465,107"/>
+<area shape="rect" id="node9" title=" " alt="" coords="489,80,621,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="645,80,719,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="41,229,121,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="271,155,333,181"/>
+</map>

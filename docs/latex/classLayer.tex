@@ -1,0 +1,156 @@
+\hypertarget{classLayer}{}\doxysection{Layer Class Reference}
+\label{classLayer}\index{Layer@{Layer}}
+
+
+Class representing a layer in a neural network.  
+
+
+
+
+{\ttfamily \#include $<$Network.\+h$>$}
+
+
+
+Collaboration diagram for Layer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classLayer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLayer_a7a1c4013757625aa04baeb7f9dd83036}{Layer}} (const std\+::string \&\mbox{\hyperlink{classLayer_a33128d74185c9cca2e077e765cc79d11}{act\+\_\+func}}, int \mbox{\hyperlink{classLayer_a0cd2a3e0ca4609f7bc73278fac0749f2}{size}}, \mbox{\hyperlink{classMatrix}{Matrix}} \&\mbox{\hyperlink{classLayer_a1588152248ef49963d47a8af56f89789}{weights}}, double $\ast$bias)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classLayer}{Layer}} class with specified activation function, size, weights, and bias. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLayer_ac118a95900f86acf96e4ca01e68d1402}{Layer}} (std\+::string \&\mbox{\hyperlink{classLayer_a33128d74185c9cca2e077e765cc79d11}{act\+\_\+func}}, int row, int \mbox{\hyperlink{classLayer_a0cd2a3e0ca4609f7bc73278fac0749f2}{size}})
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classLayer}{Layer}} class with specified activation function, size, and number of input rows. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classLayer_a33128d74185c9cca2e077e765cc79d11}{act\+\_\+func}}
+\item 
+int \mbox{\hyperlink{classLayer_a0cd2a3e0ca4609f7bc73278fac0749f2}{size}}
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classLayer_a1588152248ef49963d47a8af56f89789}{weights}}
+\item 
+\mbox{\hyperlink{classMatrix}{Matrix}} \mbox{\hyperlink{classLayer_a4e62dc0f177b1cc82187ea1146dc87f1}{gradient}}
+\item 
+double $\ast$ \mbox{\hyperlink{classLayer_ab6fc04801e12613571a042b208adab57}{bias\+\_\+weights}}
+\item 
+double $\ast$ \mbox{\hyperlink{classLayer_a9f880c10a4201916b912151146428842}{bias\+\_\+gradient}}
+\item 
+double $\ast$ \mbox{\hyperlink{classLayer_a3a1e9176f04600b135bacaf8f5ebc96a}{neurons}}
+\item 
+double $\ast$ \mbox{\hyperlink{classLayer_a8abe9e7f60c190b9298607016141e7b6}{de\+\_\+ds}}
+\item 
+double $\ast$ \mbox{\hyperlink{classLayer_ac9ea82c8a96c056748fd179362c6cd45}{dropout\+\_\+mask}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing a layer in a neural network. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLayer_a7a1c4013757625aa04baeb7f9dd83036}\label{classLayer_a7a1c4013757625aa04baeb7f9dd83036}} 
+\index{Layer@{Layer}!Layer@{Layer}}
+\index{Layer@{Layer}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{Layer()}{Layer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Layer\+::\+Layer (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{act\+\_\+func,  }\item[{int}]{size,  }\item[{\mbox{\hyperlink{classMatrix}{Matrix}} \&}]{weights,  }\item[{double $\ast$}]{bias }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{classLayer}{Layer}} class with specified activation function, size, weights, and bias. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em act\+\_\+func} & The activation function for the layer. \\
+\hline
+{\em size} & The number of neurons in the layer. \\
+\hline
+{\em weights} & \mbox{\hyperlink{classMatrix}{Matrix}} of weights connecting neurons in this layer to the next layer. \\
+\hline
+{\em bias} & Array of bias weights for each neuron in the layer. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLayer_ac118a95900f86acf96e4ca01e68d1402}\label{classLayer_ac118a95900f86acf96e4ca01e68d1402}} 
+\index{Layer@{Layer}!Layer@{Layer}}
+\index{Layer@{Layer}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{Layer()}{Layer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Layer\+::\+Layer (\begin{DoxyParamCaption}\item[{std\+::string \&}]{act\+\_\+func,  }\item[{int}]{row,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{classLayer}{Layer}} class with specified activation function, size, and number of input rows. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em act\+\_\+func} & The activation function for the layer. \\
+\hline
+{\em row} & Number of rows for input weights matrix. \\
+\hline
+{\em size} & The number of neurons in the layer. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLayer_a33128d74185c9cca2e077e765cc79d11}\label{classLayer_a33128d74185c9cca2e077e765cc79d11}} 
+\index{Layer@{Layer}!act\_func@{act\_func}}
+\index{act\_func@{act\_func}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{act\_func}{act\_func}}
+{\footnotesize\ttfamily std\+::string Layer\+::act\+\_\+func}
+
+Activation function used in the layer. \mbox{\Hypertarget{classLayer_a9f880c10a4201916b912151146428842}\label{classLayer_a9f880c10a4201916b912151146428842}} 
+\index{Layer@{Layer}!bias\_gradient@{bias\_gradient}}
+\index{bias\_gradient@{bias\_gradient}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{bias\_gradient}{bias\_gradient}}
+{\footnotesize\ttfamily double$\ast$ Layer\+::bias\+\_\+gradient}
+
+Array of gradients for bias weight updates. \mbox{\Hypertarget{classLayer_ab6fc04801e12613571a042b208adab57}\label{classLayer_ab6fc04801e12613571a042b208adab57}} 
+\index{Layer@{Layer}!bias\_weights@{bias\_weights}}
+\index{bias\_weights@{bias\_weights}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{bias\_weights}{bias\_weights}}
+{\footnotesize\ttfamily double$\ast$ Layer\+::bias\+\_\+weights}
+
+Array of bias weights for each neuron in the layer. \mbox{\Hypertarget{classLayer_a8abe9e7f60c190b9298607016141e7b6}\label{classLayer_a8abe9e7f60c190b9298607016141e7b6}} 
+\index{Layer@{Layer}!de\_ds@{de\_ds}}
+\index{de\_ds@{de\_ds}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{de\_ds}{de\_ds}}
+{\footnotesize\ttfamily double$\ast$ Layer\+::de\+\_\+ds}
+
+Array of derivatives of the activation function with respect to the summed inputs. \mbox{\Hypertarget{classLayer_ac9ea82c8a96c056748fd179362c6cd45}\label{classLayer_ac9ea82c8a96c056748fd179362c6cd45}} 
+\index{Layer@{Layer}!dropout\_mask@{dropout\_mask}}
+\index{dropout\_mask@{dropout\_mask}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{dropout\_mask}{dropout\_mask}}
+{\footnotesize\ttfamily double$\ast$ Layer\+::dropout\+\_\+mask}
+
+Array of 0 and 1 representing the dropout mask. \mbox{\Hypertarget{classLayer_a4e62dc0f177b1cc82187ea1146dc87f1}\label{classLayer_a4e62dc0f177b1cc82187ea1146dc87f1}} 
+\index{Layer@{Layer}!gradient@{gradient}}
+\index{gradient@{gradient}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{gradient}{gradient}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Layer\+::gradient}
+
+\mbox{\hyperlink{classMatrix}{Matrix}} of gradients for weight updates. \mbox{\Hypertarget{classLayer_a3a1e9176f04600b135bacaf8f5ebc96a}\label{classLayer_a3a1e9176f04600b135bacaf8f5ebc96a}} 
+\index{Layer@{Layer}!neurons@{neurons}}
+\index{neurons@{neurons}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{neurons}{neurons}}
+{\footnotesize\ttfamily double$\ast$ Layer\+::neurons}
+
+Array of output values from the neurons in the layer. \mbox{\Hypertarget{classLayer_a0cd2a3e0ca4609f7bc73278fac0749f2}\label{classLayer_a0cd2a3e0ca4609f7bc73278fac0749f2}} 
+\index{Layer@{Layer}!size@{size}}
+\index{size@{size}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int Layer\+::size}
+
+Number of neurons in the layer. \mbox{\Hypertarget{classLayer_a1588152248ef49963d47a8af56f89789}\label{classLayer_a1588152248ef49963d47a8af56f89789}} 
+\index{Layer@{Layer}!weights@{weights}}
+\index{weights@{weights}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{weights}{weights}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}} Layer\+::weights}
+
+\mbox{\hyperlink{classMatrix}{Matrix}} of weights connecting the neurons in this layer to the next layer. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{Network_8h}{Network.\+h}}\end{DoxyCompactItemize}
