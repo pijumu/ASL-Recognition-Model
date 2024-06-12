@@ -27,7 +27,8 @@ int \mbox{\hyperlink{classNetwork_a32ecf3497d24f643ba2aca37e0230f0c}{predict}} (
 \begin{DoxyCompactList}\small\item\em Make a prediction using the current network configuration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classNetwork_afb2515d0b5bed55a26a4211e7e93d832}{write\+\_\+weights}} (const std\+::string \&path)
 \begin{DoxyCompactList}\small\item\em Write updated weights to a specified file path. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classNetwork_a9306d23a0131fbe5d9802bcfdc66b1fa}{dropout\+\_\+mask}} (double p)
+\mbox{\Hypertarget{classNetwork_a34a9c82c2c00720e942bc41bd8bebd34}\label{classNetwork_a34a9c82c2c00720e942bc41bd8bebd34}} 
+void \mbox{\hyperlink{classNetwork_a34a9c82c2c00720e942bc41bd8bebd34}{dropout\+\_\+mask}} ()
 \begin{DoxyCompactList}\small\item\em Creates a dropout mask for use in neural networks. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -41,6 +42,8 @@ std\+::vector$<$ \mbox{\hyperlink{classLayer}{Layer}} $>$ \mbox{\hyperlink{class
 double $\ast$ \mbox{\hyperlink{classNetwork_a91dfe5e98cb784fd1bff49ec2562e296}{initial\+\_\+neurons}}
 \item 
 double $\ast$ \mbox{\hyperlink{classNetwork_a448a02532dfc6890de7957a143e38142}{dropout\+\_\+ini\+\_\+mask}}
+\item 
+double \mbox{\hyperlink{classNetwork_ae5bf13c9d8b8c33fbae09a5cc6a58d2e}{dropout\+\_\+prob}}
 \end{DoxyCompactItemize}
 
 
@@ -81,21 +84,6 @@ Perform backpropagation to update weights based on expected output.
 
 \begin{DoxyParams}{Parameters}
 {\em expected} & Array of expected output values. \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{classNetwork_a9306d23a0131fbe5d9802bcfdc66b1fa}\label{classNetwork_a9306d23a0131fbe5d9802bcfdc66b1fa}} 
-\index{Network@{Network}!dropout\_mask@{dropout\_mask}}
-\index{dropout\_mask@{dropout\_mask}!Network@{Network}}
-\doxysubsubsection{\texorpdfstring{dropout\_mask()}{dropout\_mask()}}
-{\footnotesize\ttfamily void Network\+::dropout\+\_\+mask (\begin{DoxyParamCaption}\item[{double}]{p }\end{DoxyParamCaption})}
-
-
-
-Creates a dropout mask for use in neural networks. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em p} & The probability of setting an element of the mask to zero. Each element of the mask will be set to zero with probability p, and left unchanged with probability (1 -\/ p). \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classNetwork_a32ecf3497d24f643ba2aca37e0230f0c}\label{classNetwork_a32ecf3497d24f643ba2aca37e0230f0c}} 
@@ -165,7 +153,13 @@ Write updated weights to a specified file path.
 \doxysubsubsection{\texorpdfstring{dropout\_ini\_mask}{dropout\_ini\_mask}}
 {\footnotesize\ttfamily double$\ast$ Network\+::dropout\+\_\+ini\+\_\+mask}
 
-Array of 0 and 1 representing the dropout mask for initial neurons. \mbox{\Hypertarget{classNetwork_a91dfe5e98cb784fd1bff49ec2562e296}\label{classNetwork_a91dfe5e98cb784fd1bff49ec2562e296}} 
+Array of 0 and 1 representing the dropout mask for initial neurons. \mbox{\Hypertarget{classNetwork_ae5bf13c9d8b8c33fbae09a5cc6a58d2e}\label{classNetwork_ae5bf13c9d8b8c33fbae09a5cc6a58d2e}} 
+\index{Network@{Network}!dropout\_prob@{dropout\_prob}}
+\index{dropout\_prob@{dropout\_prob}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{dropout\_prob}{dropout\_prob}}
+{\footnotesize\ttfamily double Network\+::dropout\+\_\+prob}
+
+Probability of dropping out a neuron during training. \mbox{\Hypertarget{classNetwork_a91dfe5e98cb784fd1bff49ec2562e296}\label{classNetwork_a91dfe5e98cb784fd1bff49ec2562e296}} 
 \index{Network@{Network}!initial\_neurons@{initial\_neurons}}
 \index{initial\_neurons@{initial\_neurons}!Network@{Network}}
 \doxysubsubsection{\texorpdfstring{initial\_neurons}{initial\_neurons}}

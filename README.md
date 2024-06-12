@@ -65,23 +65,25 @@ cmake .. && cmake --build .
 
 ## 🎓 Usage for training:
 
-1. Training config all_yaml_configs/settings_train.yaml:
+1. Training config ***all_yaml_configs/settings_train.yaml***:
 
-```
+```yaml
 network_cfg_path: all_yaml_configs/network_config_train.yaml
 train_or_predict: train
 data_folder: /asl_alphabet_train
 epochs: 10
 batch_size: 17
 output_file: all_yaml_configs/save_weights.yaml
-dropout_probability: 0.25
 ```
 
-2. Training config all_yaml_configs/network_config_train.yaml:
-
-```
+2. Training config ***all_yaml_configs/settings_train.yaml***:
+- Choose dropout probability.
+- Choose activation functions: ***relu***, ***sigmoid***, ***softmax***.
+- Choose layer sizes.
+```yaml
 network_size: 2
 size_of_initial_neurons: 1600
+dropout_probability: 0.5
 layers:
 - activate_function: relu
   layer_size: 256
@@ -89,9 +91,9 @@ layers:
   layer_size: 29
 ```
 
-3. Change source.cpp file:
+3. Change ***source.cpp***:
 
-```
+```c++
 YAML::Node settings = YAML::LoadFile("../all_yaml_configs/settings_train.yaml");
 ...
 ```
@@ -105,22 +107,22 @@ cd build
 
 ## 🎯 Usage for predicting:
 
-1. Training config all_yaml_configs/settings_predict.yaml:
+1. Predicting config ***all_yaml_configs/settings_predict.yaml***:
 
-```
+```yaml
 network_cfg_path: all_yaml_configs/save_weights.yaml
 train_or_predict: predict
 data_folder: /asl_alphabet_test
 ```
 
-2. Change source.cpp file:
+2. Change ***source.cpp***:
 
-```
+```c++
 YAML::Node settings = YAML::LoadFile("../all_yaml_configs/settings_predict.yaml");
 ...
 ```
 
-3. Running :
+3. Running:
 
 ```
 cd build

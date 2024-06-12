@@ -68,6 +68,7 @@ public:
     std::vector<Layer> layers; /**< Vector containing all layers in the network. */
     double *initial_neurons; /**< Array of initial input values to the network. */
     double *dropout_ini_mask; /**< Array of 0 and 1 representing the dropout mask for initial neurons. */
+    double dropout_prob; /**< Probability of dropping out a neuron during training. */
 
     /**
      * @brief Constructor for Network class that loads network configuration from a YAML file.
@@ -113,9 +114,7 @@ public:
 
     /**
      * @brief Creates a dropout mask for use in neural networks.
-     * @param p The probability of setting an element of the mask to zero. Each element of the mask will be set to zero with probability p,
-     *          and left unchanged with probability (1 - p).
      */
-    void dropout_mask(double p);
+    void dropout_mask();
 };
 #endif

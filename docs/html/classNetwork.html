@@ -99,9 +99,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:afb2515d0b5bed55a26a4211e7e93d832"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#afb2515d0b5bed55a26a4211e7e93d832">write_weights</a> (const std::string &amp;path)</td></tr>
 <tr class="memdesc:afb2515d0b5bed55a26a4211e7e93d832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write updated weights to a specified file path.  <a href="classNetwork.html#afb2515d0b5bed55a26a4211e7e93d832">More...</a><br /></td></tr>
 <tr class="separator:afb2515d0b5bed55a26a4211e7e93d832"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9306d23a0131fbe5d9802bcfdc66b1fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#a9306d23a0131fbe5d9802bcfdc66b1fa">dropout_mask</a> (double p)</td></tr>
-<tr class="memdesc:a9306d23a0131fbe5d9802bcfdc66b1fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a dropout mask for use in neural networks.  <a href="classNetwork.html#a9306d23a0131fbe5d9802bcfdc66b1fa">More...</a><br /></td></tr>
-<tr class="separator:a9306d23a0131fbe5d9802bcfdc66b1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34a9c82c2c00720e942bc41bd8bebd34"><td class="memItemLeft" align="right" valign="top"><a id="a34a9c82c2c00720e942bc41bd8bebd34"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#a34a9c82c2c00720e942bc41bd8bebd34">dropout_mask</a> ()</td></tr>
+<tr class="memdesc:a34a9c82c2c00720e942bc41bd8bebd34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a dropout mask for use in neural networks. <br /></td></tr>
+<tr class="separator:a34a9c82c2c00720e942bc41bd8bebd34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -115,6 +116,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a91dfe5e98cb784fd1bff49ec2562e296"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a448a02532dfc6890de7957a143e38142"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#a448a02532dfc6890de7957a143e38142">dropout_ini_mask</a></td></tr>
 <tr class="separator:a448a02532dfc6890de7957a143e38142"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5bf13c9d8b8c33fbae09a5cc6a58d2e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#ae5bf13c9d8b8c33fbae09a5cc6a58d2e">dropout_prob</a></td></tr>
+<tr class="separator:ae5bf13c9d8b8c33fbae09a5cc6a58d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class representing a neural network with multiple layers. </p>
@@ -177,32 +180,6 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">expected</td><td>Array of expected output values. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a9306d23a0131fbe5d9802bcfdc66b1fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9306d23a0131fbe5d9802bcfdc66b1fa">&#9670;&nbsp;</a></span>dropout_mask()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Network::dropout_mask </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a dropout mask for use in neural networks. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The probability of setting an element of the mask to zero. Each element of the mask will be set to zero with probability p, and left unchanged with probability (1 - p). </td></tr>
   </table>
   </dd>
 </dl>
@@ -320,6 +297,21 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Array of 0 and 1 representing the dropout mask for initial neurons. </p>
+
+</div>
+</div>
+<a id="ae5bf13c9d8b8c33fbae09a5cc6a58d2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5bf13c9d8b8c33fbae09a5cc6a58d2e">&#9670;&nbsp;</a></span>dropout_prob</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Network::dropout_prob</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Probability of dropping out a neuron during training. </p>
 
 </div>
 </div>

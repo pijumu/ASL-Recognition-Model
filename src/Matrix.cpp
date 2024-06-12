@@ -1,10 +1,14 @@
 #include "Matrix.h"
+#include <random>
 
 Matrix::Matrix(const int row, const int column): row(row), column(column), elements(new double *[row]) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0, 1.0/row);
     for (int i{0}; i < row; ++i) {
         elements[i] = new double [column];
         for (int j{0}; j < column; ++j) {
-            elements[i][j] = ((std::rand() % 10) * 0.007);
+            elements[i][j] = dis(gen);
         }
     }
 }

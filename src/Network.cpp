@@ -160,21 +160,21 @@ void Network::back_propagation(double *expected) {
     }
     for (int j = 0; j < layers[0].gradient.get_row(); ++j) {
         for (int t = 0; t < layers[0].gradient.get_column(); ++t) {
-            layers[0].gradient.elem(j, t) -= initial_neurons[j] * layers[0].de_ds[t];
+            layers[0].gradient.elem(j, t) -= initial_neurons[j] * layers[0].de_ds[t] / (1 - dropout_prob);
         }
     }
     for (int t = 0; t < layers[0].gradient.get_column(); ++t) {
-        layers[0].bias_gradient[t] -= layers[0].de_ds[t];
+        layers[0].bias_gradient[t] -= layers[0].de_ds[t] / (1 - dropout_prob);
     }
 
     for (int i = 1; i < size; ++i) {
         for (int j = 0; j < layers[i].gradient.get_row(); ++j) {
             for (int t = 0; t < layers[i].gradient.get_column(); ++t) {
-                layers[i].gradient.elem(j, t) -= layers[i - 1].neurons[j] * layers[i].de_ds[t];
+                layers[i].gradient.elem(j, t) -= layers[i - 1].neurons[j] * layers[i].de_ds[t] / (1 - dropout_prob);
             }
         }
         for (int k = 0; k < layers[i].gradient.get_column(); ++k) {
-            layers[i].bias_gradient[k] -= layers[i].de_ds[k];
+            layers[i].bias_gradient[k] -= layers[i].de_ds[k] / (1 - dropout_prob);
         }
     }
     for (int i = 0; i < size; ++i) {
@@ -213,14 +213,14 @@ int Network::predict() {
     return index;
 }
 
-void Network::dropout_mask(double p) {
+void Network::dropout_mask() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0, 1.0);
 
     for (int i = 0; i < size - 1; ++i) {
         for (int j = 0; j < layers[i].size; ++j) {
-            if (const double random_value = dis(gen); random_value <= p) {
+            if (const double random_value = dis(gen); random_value <= dropout_prob) {
                 layers[i].dropout_mask[j] = 0.0;
             } else {
                 layers[i].dropout_mask[j] = 1.0;
@@ -228,7 +228,7 @@ void Network::dropout_mask(double p) {
         }
     }
     for (int x = 0; x < layers[0].weights.get_row(); ++x) {
-        if (const double random_value = dis(gen); random_value <= p) {
+        if (const double random_value = dis(gen); random_value <= dropout_prob) {
             dropout_ini_mask[x] = 0.0;
         } else {
             dropout_ini_mask[x] = 1.0;
