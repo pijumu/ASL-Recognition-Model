@@ -43,6 +43,11 @@ Network::Network(const std::string &path, const std::string &train_or_predict) {
             Layer layer{activate_function, row, layer_size};
             layers.push_back(layer);
         }
+        if (train_or_predict == "train") {
+            dropout_prob = config["dropout_probability"].as<double>();
+        } else {
+            dropout_prob = 0.0;
+        }
         if (index == size - 1 && activate_function == "softmax") {
             loss_func = CrossEntropy;
         } else if (index == size - 1 && activate_function != "softmax") {

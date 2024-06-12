@@ -4,6 +4,7 @@ TEST_CASE("Testing network train constructor") {
     Network network{"test/config_train_test.yaml", "train"};
     CHECK(network.loss_func == CrossEntropy);
     CHECK(network.size == 2);
+    CHECK(network.dropout_prob == 0.5);
     CHECK(network.layers.size() == 2);
     CHECK(network.layers[0].act_func == "relu");
     CHECK(network.layers[1].size == 29);
