@@ -98,7 +98,7 @@ YAML::Node settings = YAML::LoadFile("../all_yaml_configs/settings_train.yaml");
 ...
 ```
 
-4. Running :
+4. Running:
 
 ```
 cd build
