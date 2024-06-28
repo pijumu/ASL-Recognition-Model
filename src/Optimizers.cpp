@@ -2,8 +2,8 @@
 #include <cstring>
 #include <cmath>
 
-Adam::Adam(int row, int column): row(row+1), column(column), m(new double* [row]), v(new double* [row]) {
-    for (int i=0; i<row+1; ++i) {
+Adam::Adam(int row, int column): row(row+1), column(column), m(new double* [row+1]), v(new double* [row+1]) {
+    for (int i=0; i<this->row; ++i) {
         m[i] = new double [column];
         v[i] = new double [column];
         memset(m[i], 0.0, column);
@@ -41,8 +41,8 @@ Adam::~Adam() {
     delete[] v;
 }
 
-RMSprop::RMSprop(int row, int column): row(row+1), column(column), v(new double* [row]) {
-    for (int i=0; i<row+1; ++i) {
+RMSprop::RMSprop(int row, int column): row(row+1), column(column), v(new double* [row+1]) {
+    for (int i=0; i<this->row; ++i) {
         v[i] = new double [column];
         memset(v[i], 0.0, column);
     }
