@@ -1,8 +1,0 @@
-network_size: 2
-size_of_initial_neurons: 1600
-dropout_probability: 0.5
-layers:
-  - activate_function: relu
-    layer_size: 256
-  - activate_function: softmax
-    layer_size: 29

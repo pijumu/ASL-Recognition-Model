@@ -1,3 +1,0 @@
-network_cfg_path: all_yaml_configs/save_weights.yaml
-train_or_predict: predict
-data_folder: /asl_alphabet_test

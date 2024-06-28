@@ -1,6 +1,0 @@
-network_cfg_path: all_yaml_configs/network_config_train.yaml
-train_or_predict: train
-data_folder: /asl_alphabet_train
-epochs: 20
-batch_size: 17
-output_file: save_weights.yaml
